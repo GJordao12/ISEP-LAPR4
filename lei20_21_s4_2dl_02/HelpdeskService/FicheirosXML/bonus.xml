@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<colaboradores>
+    <colaborador numeroMeca="11904">
+        <mes nome="janeiro">1020</mes>
+        <mes nome="fevereiro">1120</mes>
+        <mes nome="março">1020</mes>
+        <mes nome="abril">900</mes>
+        <mes nome="maio">2500</mes>
+        <mes nome="junho">1020</mes>
+        <mes nome="julho">0</mes>
+        <mes nome="agosto">0</mes>
+        <mes nome="setembro">1020</mes>
+        <mes nome="outubro">1020</mes>
+        <mes nome="novembro">3000</mes>
+        <mes nome="dezembro">0</mes>
+    </colaborador>
+    <colaborador numeroMeca="11809">
+        <mes nome="janeiro">600</mes>
+        <mes nome="fevereiro">600</mes>
+        <mes nome="março">600</mes>
+        <mes nome="abril">0</mes>
+        <mes nome="maio">0</mes>
+        <mes nome="junho">1000</mes>
+        <mes nome="julho">1000</mes>
+        <mes nome="agosto">1000</mes>
+        <mes nome="setembro">600</mes>
+        <mes nome="outubro">600</mes>
+        <mes nome="novembro">750</mes>
+        <mes nome="dezembro">0</mes>
+    </colaborador>
+</colaboradores>

@@ -1,0 +1,31 @@
+@startuml
+'http://plantuml.com/skinparam.html
+
+
+class AddTipoEquipaUI {
+      +doShow()
+}
+
+class AddTipoEquipaController {
+    +registerTipoEquipa(String,String, String)
+}
+
+class TipoEquipa {
+-CodigoAlfaNumerico codAlfaNum;
+-Descricao descricao;
+-Cor cor;
+}
+
+class TipoEquipaRepository {
+  +save(TipoEquipa)
+}
+
+
+AddTipoEquipaUI  --> AddTipoEquipaController : theController
+
+AddTipoEquipaUI  -->  TipoEquipa : theTipoEquipa
+
+AddTipoEquipaController  -->  TipoEquipaRepository : repo
+
+AddTipoEquipaController  -->  TipoEquipa : theTipoEquipa
+@enduml

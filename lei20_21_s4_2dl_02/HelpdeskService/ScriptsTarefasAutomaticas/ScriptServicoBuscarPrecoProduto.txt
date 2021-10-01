@@ -1,0 +1,6 @@
+START{
+Ficheiro FicheirosXML/produtos.xml [
+Elemento #preco# = Buscar produto($ID$,<preco>);
+EnviarEmail("Preco do Produto com ID: $ID$", "O preco do produto com ID: $ID$ sao #preco# euros.");
+]
+}

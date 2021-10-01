@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
+  <persistence-unit name="eapli.eCafeteriaPU">
+
+      <!--
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    -->
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+    <class>eapli.framework.infrastructure.authz.domain.model.SystemUser</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.Role</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
+    <class>eapli.helpdesk.tipoEquipa.domain.TipoEquipa</class>
+    <class>eapli.helpdesk.colaborador.domain.Collaborator</class>
+    <class>eapli.helpdesk.equipa.domain.Team</class>
+    <class>eapli.helpdesk.catalogo.domain.Catalogo</class>
+    <class>eapli.helpdesk.criticidade.domain.Criticidade</class>
+    <class>eapli.helpdesk.servico.domain.Servico</class>
+    <class>eapli.helpdesk.servico.domain.Formulario</class>
+    <class>eapli.helpdesk.servico.domain.AtributoFormulario</class>
+    <class>eapli.helpdesk.colaborador.domain.RoleCollaborator</class>
+    <class>eapli.helpdesk.servico.domain.Workflow</class>
+    <class>eapli.helpdesk.atividade.AtividadeAutomatica</class>
+    <class>eapli.helpdesk.atividade.AtividadeManual</class>
+    <class>eapli.helpdesk.atividadeTicket.domain.AtividadeTicket</class>
+    <class>eapli.helpdesk.ticket.domain.Ticket</class>
+    <class>eapli.helpdesk.servico.domain.FormularioPreenchido</class>
+    <class>eapli.helpdesk.servico.domain.AtributoPreenchido</class>
+    <class>eapli.helpdesk.feedback.domain.FeedbackTicket</class>
+    <class>eapli.helpdesk.sla.domain.SLA</class>
+  
+    <properties>
+      <property name="javax.persistence.jdbc.url" value=""/>
+      <property name="javax.persistence.jdbc.user" value=""/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <!-- <property name="eclipselink.logging.level" value="FINE"/> -->
+      <!-- <property name = "hibernate.show_sql" value = "true" /> -->
+      <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+
+    </properties>
+  </persistence-unit>
+</persistence>

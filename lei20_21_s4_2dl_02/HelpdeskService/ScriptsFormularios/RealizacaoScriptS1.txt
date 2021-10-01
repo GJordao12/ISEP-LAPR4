@@ -1,0 +1,10 @@
+1 -> obrigatorio;
+2 -> obrigatorio;
+3 -> obrigatorio;
+4 -> obrigatorio;
+5 -> obrigatorio;
+6 -> obrigatorio;
+7 -> obrigatorio;
+8 -> obrigatorio;
+9 -> obrigatorio;
+10 -> nao obrigatorio;

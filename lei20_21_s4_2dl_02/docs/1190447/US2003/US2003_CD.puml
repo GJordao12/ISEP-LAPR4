@@ -1,0 +1,136 @@
+@startuml
+'http://plantuml.com/skinparam.html
+
+
+class AddServicoUI {
+      +doShow()
+}
+
+class AddServicoController {
++registerServicoTransaction(String codAlfaNum, String descricaoBreve, String descricaoCompletaServico,String feedback, String tempoLimiteFeedback, String titulo, String icone,Set<String> keywords,Criticidade criticidade,String estadoServico)
++registerAtributoFormularioSolicitacao(String nomeAtributo, String descricao, String expressaoRegular, String tipoDados, String etiqueta)
++registerAtributoFormularioAtividadeManualExecucao(String nomeAtributo, String descricao, String expressaoRegular, String tipoDados, String etiqueta)
++registerAtributoFormularioAtividadeManualAprovacao(String nomeAtributo, String descricao, String expressaoRegular, String tipoDados, String etiqueta)
++registerFormularioSolicitacao(String codAlfaNum, String nome, String etiqueta, File script)
++registerFormularioAtividadeManualExecucao(String codAlfaNum, String nome, String etiqueta, File script)
++registerFormularioAtividadeManualAprovacao(String codAlfaNum, String nome, String etiqueta, File script)
++registerAtividadeManualExecucao()
++registerAtividadeManualAprovacao()
++registerAtividadeAutomatica(File script)
++registerWorkflow(String diaMudanca)
++registerTitulo(String titulo)
++registerCodigoAlfaNumerico(String codAlfa)
++registerDescricaoBreve(String descricaoBreve)
++registerDescricaoCompleta(String descricaoCompleta)
++registerIcone(String imageFilename)
++findAllCatalogos()
++allServices()
++changeListaServicoCatalogo(final Catalogo catalogo, final List<Servico> servicos)
++allCriticidades()
+}
+
+class Servico {
+-CodigoAlfaNumerico codAlfaNum
+-DescricaoBreve descricaoBreve
+-DescricaoCompletaServico descricaoCompletaServico
+-String estadoServico
+-String feedback
+-Integer tempoLimiteFeedback
+-Titulo titulo
+-byte[] icone
+-Set<String> keywords
+-Criticidade criticidade
+-Formulario formularioDeSolicitacao
+-Workflow workflow;
+}
+
+class Formulario{
+-CodigoAlfaNumerico codAlfaNum
+-Nome nome
+-Etiqueta etiqueta
+-File script
+-Set<AtributoFormulario> atributos
+}
+
+class Atividade{
+-Long cod
+}
+
+class AtividadeManual{
+-Formulario formularioAtividadeManual
+}
+
+class AtividadeAutomatica{
+-File script
+}
+
+class Workflow{
+-long id
+-Calendar diaMudanca
+-AtividadeManual atividadeAprovacao
+-AtividadeManual atividadeManual
+-AtividadeAutomatica atividadeAutomatica
+}
+
+class ServicoRepository{
++save(servico)
+}
+
+class CatalogoRepository{
++save(catalogo)
++findAll()
+}
+
+class CriticidadeRepository{
++findAll()
+}
+
+class AtividadeAutomaticaRepository{
++save(atividadeAutomatica)
+}
+
+class AtividadeManualRepository{
++save(atividadeManual)
+}
+
+class WorkflowRepository{
++save(workflow)
+}
+
+class FormularioRepository{
++save(formulario)
+}
+
+
+AddServicoUI  --> AddServicoController : theController
+
+AddServicoUI  -->  Servico : theServico
+AddServicoUI  -->  Formulario : theFormulario
+AddServicoUI  -->  Workflow : theWorkflow
+AddServicoUI  -->  Atividade : theAtividade
+AddServicoUI  -->  AtividadeManual : theAtividadeManual
+AddServicoUI  -->  AtividadeAutomatica : theAtividadeAutomatica
+
+
+Atividade --> AtividadeManual : é
+Atividade --> AtividadeAutomatica : é
+
+
+Servico --> Formulario : tem formulario de solicitação de serviço
+Servico --> Workflow : tem
+Workflow --> Atividade : tem
+
+AtividadeManual --> Formulario : tem
+
+AddServicoController  -->  ServicoRepository : repoServico
+AddServicoController  -->  ServicoRepository : repoServico
+AddServicoController  -->  CatalogoRepository : repoCatalogo
+AddServicoController  -->  CriticidadeRepository : repoCriticidade
+AddServicoController  -->  AtividadeAutomaticaRepository : repoAtividadeAutomatica
+AddServicoController  -->  AtividadeManualRepository : repoAtividadeManual
+AddServicoController  -->  WorkflowRepository : repoWorkflow
+AddServicoController  -->  FormularioRepository : repoFormulario
+
+AddServicoController  -->  Servico : theServico
+
+@enduml

@@ -1,0 +1,6 @@
+START{
+Ficheiro FicheirosXML/produtos.xml [
+Alterar produto($ID$,<desconto>,$Desconto$);
+EnviarEmail("Alteracao do Desconto do Produto com ID: $ID$", "O desconto do produto com ID: $ID$ foi alterado para $Desconto$ porcento.");
+]
+}

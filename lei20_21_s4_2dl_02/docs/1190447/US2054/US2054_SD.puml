@@ -1,0 +1,31 @@
+@startuml
+'http://plantuml.com/skinparam.html
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor RRH as Actor
+participant AddTipoEquipaUI as UI <<presentation>>
+control AddTipoEquipaController as Controller <<application>>
+participant "tipoEquipa:tipoEquipa" as Domain <<domain>>
+database TipoEquipaRepository as Repository <<repository>>
+
+-> UI: doShow()
+activate UI
+
+    UI --> Actor: Pede ao utilizador que insira a cor ,o código alfanumérico e a descrição
+    Actor --> UI: Insere os dados
+
+    UI -> Controller: addTipoEquipa(cor,codAlfanum,descricao)
+    activate Controller
+        Controller -> Domain:addTipoEquipa(cor,codAlfanum,descricao)
+
+        Controller->Repository:save(TipoEquipa)
+        Controller->UI: TipoEquipa
+    deactivate Controller
+
+        UI-->Actor: apresenta o menu
+deactivate UI
+@enduml

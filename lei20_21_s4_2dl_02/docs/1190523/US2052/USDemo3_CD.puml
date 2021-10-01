@@ -1,0 +1,29 @@
+@startuml
+'http://plantuml.com/skinparam.html
+
+
+class AddTeamUI {
+      +doShow()
+}
+
+class AddTeamController {
+    +addTeam(String codigoAlfaNumerico, String acronym, String designation,\n TipoEquipa teamType, List<Collaborator> listR, List<Collaborator> listM)
+}
+
+class Team {
+
+}
+
+class TeamRepository {
+  +save(Team)
+}
+
+
+AddTeamUI  --> AddTeamController : theController
+
+AddTeamUI  -->  Team : theTeam
+
+AddTeamController  -->  TeamRepository : repo
+
+AddTeamController  -->  Team : theTeam
+@enduml

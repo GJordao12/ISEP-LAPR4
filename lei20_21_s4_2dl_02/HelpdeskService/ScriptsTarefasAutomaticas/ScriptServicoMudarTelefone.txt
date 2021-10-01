@@ -1,0 +1,4 @@
+START{
+MudarTelemovel($Numero de Telefone$);
+EnviarEmail("Numero de Telefone","O seu numero de telefone foi alterado com sucesso.");
+}

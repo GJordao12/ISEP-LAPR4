@@ -1,0 +1,24 @@
+# This is a sample build configuration for Java (Maven).
+# Check our guides at https://confluence.atlassian.com/x/zd-5Mw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: maven:3.6.3-jdk-11
+
+clone:
+  depth: full    # SonarCloud scanner needs the full history to assign issues properly
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - maven
+        script: # Modify the commands below to build your repository.
+          - mvn -B verify -Dmaven.javadoc.skip=true
+    - step:
+        trigger: manual
+        caches:
+          - maven
+        script: # Modify the commands below to build your repository.
+          - mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent verify org.jacoco:jacoco-maven-plugin:report -Dmaven.test.failure.ignore=true -Dmaven.javadoc.skip=true
+          - mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dmaven.javadoc.skip=true

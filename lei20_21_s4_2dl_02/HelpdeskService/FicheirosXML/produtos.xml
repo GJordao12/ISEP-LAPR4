@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><produtos>
+    <produto id="1">
+        <nome>Bola</nome>
+        <preco>5</preco>
+        <unidades>10</unidades>
+        <desconto>30</desconto>
+    </produto>
+    <produto id="2">
+        <nome>Toalha</nome>
+        <preco>7</preco>
+        <unidades>25</unidades>
+        <desconto>2</desconto>
+    </produto>
+    <produto id="3">
+        <nome>Guarda-Sol</nome>
+        <preco>15</preco>
+        <unidades>5</unidades>
+        <desconto>13</desconto>
+    </produto>
+    <produto id="4">
+        <nome>Protetor</nome>
+        <preco>25</preco>
+        <unidades>35</unidades>
+        <desconto>75</desconto>
+    </produto>
+</produtos>

@@ -1,0 +1,114 @@
+<html>
+<head><title>DASHBOARD</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="rcomp-ajax.js"></script>
+</head>
+<body onload="refreshPersonalInfo(); refreshTable(); refreshTable1(); refreshTable2(); drawClock(); showClock()">
+<div class="context">
+    <h1>BEM-VINDO À SUA DASHBOARD</h1>
+</div>
+<div class="area">
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<div class="topnav" id="personalInformation">
+    <a class="active" href="#home">Personal Information</a>
+    <a href="#news">Nome:</a>
+    <a href="#news">Email:</a>
+    <a href="#news">Numero de Tarefas:</a>
+</div>
+<div class="box">
+    <div class="insideBox">
+        <div class="title">
+            <p>As suas tarefas pendentes ordenadas por nível de criticidade:</p>
+        </div>
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table class="styled-table">
+                    <thead>
+                    <tr>
+                        <th>Tipo de Tarefa</th>
+                        <th>Código do Serviço</th>
+                        <th>Descrição Breve Serviço</th>
+                        <th>ID Ticket</th>
+                        <th>Prioridade</th>
+                        <th>Criticidade (Valor)</th>
+                        <th>Data Limite</th>
+                    </tr>
+                    </thead>
+                    <tbody id = "info">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box">
+    <div class="insideBox">
+        <div class="title">
+            <p>As suas tarefas pendentes ordenadas por prioridade:</p>
+        </div>
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table class="styled-table">
+                    <thead>
+                    <tr>
+                        <th>Tipo de Tarefa</th>
+                        <th>Código do Serviço</th>
+                        <th>Descrição Breve Serviço</th>
+                        <th>ID Ticket</th>
+                        <th>Prioridade</th>
+                        <th>Criticidade (Valor)</th>
+                        <th>Data Limite</th>
+                    </tr>
+                    </thead>
+                    <tbody id = "info1">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box">
+    <div class="insideBox">
+        <div class="title">
+            <p>As suas tarefas pendentes ordenadas por deadline:</p>
+        </div>
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table class="styled-table">
+                    <thead>
+                    <tr>
+                        <th>Tipo de Tarefa</th>
+                        <th>Código do Serviço</th>
+                        <th>Descrição Breve Serviço</th>
+                        <th>ID Ticket</th>
+                        <th>Prioridade</th>
+                        <th>Criticidade (Valor)</th>
+                        <th>Data Limite</th>
+                    </tr>
+                    </thead>
+                    <tbody id = "info2">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <address>
+        Helpdesk Service Dashboard (C)
+    </address>
+</footer>
+</body>
+</html>

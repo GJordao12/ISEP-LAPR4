@@ -1,0 +1,79 @@
+<html>
+<head><title>Servicos RH</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="rcomp-ajax.js"></script>
+</head>
+<body onload="refreshDate(); refreshTable(); refreshTable1();">
+<div class="context">
+    <h1>ESTADO DO MOTOR DE FLUXOS</h1>
+</div>
+<div class="area">
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<div class="topnav" id="data">
+    <a class="active" href="#home">Data</a>
+    <a href="#news"> </a>
+</div>
+<div class="box">
+    <div class="insideBox">
+        <div class="title">
+            <p>Informação sobre Tickets criados desde a abertura do motor de fluxos:</p>
+        </div>
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table class="styled-table">
+                    <thead>
+                    <tr>
+                        <th>Número de Tickets criados</th>
+                        <th>Número de Tickets concluidos</th>
+                        <th>Número de Tickets por aprovar</th>
+                        <th>Número de Tickets por realizar</th>
+                    </tr>
+                    </thead>
+                    <tbody id = "Tickets">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box">
+    <div class="insideBox">
+        <div class="title">
+            <p>Percentagens dos Tickets criados desde a abertura do motor de fluxos</p>
+        </div>
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table class="styled-table">
+                    <thead>
+                    <tr>
+                        <th>Percentagem de Tickets criados</th>
+                        <th>Percentagem de Tickets concluidos</th>
+                        <th>Percentagem de Tickets por aprovar</th>
+                        <th>Percentagem de Tickets por realizar</th>
+                    </tr>
+                    </thead>
+                    <tbody id = "Percentagens">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <address>
+        Helpdesk Service Motor de Fluxos (C)
+    </address>
+</footer>
+</body>
+</html>

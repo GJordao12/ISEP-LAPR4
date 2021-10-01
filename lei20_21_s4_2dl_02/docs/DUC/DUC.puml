@@ -1,0 +1,51 @@
+@startuml
+
+usecase US2051 as "US2051 - Especificar Colaborador"
+usecase US2054 as "US2054 - Registar Novo Tipo de Equipa"
+usecase US2052 as "US2052 - Criar Nova Equipa"
+usecase USDEMO4 as "USDEMO4 - Criar Novo Catálogo de Serviços"
+usecase US2002a as "US2002a - Especificar Novo Serviço"
+usecase US2053a as "US2053a - Associar Colaborador a Equipa"
+usecase US2053b as "US2053b - Remover Colaborador a Equipa"
+usecase USDEMO8 as "USDEMO8 - Consultar/Pesquisar Catálogos e Respetivos Serviços Disponíveis"
+usecase US2010 as "US2010 - Definir Níveis de Criticidade e Respetivos Objetivos para Definição de SLAs"
+usecase US2002b as "US2002b - Continuar/alterar o serviço"
+usecase US3022 as "US3022 - Consultar as Tarefas pendentes que posso reivindicar"
+usecase US3051 as "US3051 - Transmitir o meu grau de satisfação sobre a resolução de um dado pedido por mim efetuado"
+usecase US1006 as "US1006 - Desenvolvimento da componente representativa de uma tarefa automática"
+usecase US3011 as "US3011 - Apresentar Dashboard Web"
+usecase US3021 as "US3021 - Consultar tarefas pendentes assignadas"
+usecase US3023 as "US3023 - Realizar uma tarefa pendente"
+usecase US3031 as "US3031 - Consultar pedidos e respetivos detalhes"
+usecase US3101 as "US3101 - Proteção das comunicações realizadas através do protocolo SDP2021"
+usecase US4072 as "US4072 - Desenvolvimento de algoritmos que assignem automáticamente tarefas a colaboradores"
+usecase US2003 as "US2003 - Completar a especificação do serviço "
+usecase US4002 as "US4002 - Disponibilizar, a pedido, os dados necessários às aplicações "Serviços e RH" e "Portal dos Utilizadores""
+usecase US4001 as "US4001 - Desenvolver no Motor de Fluxo de Atividade o mecanismo de gestão/controlo/avanço do fluxo de atividades de um dado pedido."
+
+
+actor "Gestor de Serviços de Help desk (GSH)" as GSH
+actor "Responsável de Recursos Humanos (RRH)" as RRH
+actor "Colaborador" as COL
+
+left to right direction
+
+RRH -->(US2051)
+RRH -->(USDEMO2)
+RRH -->(US2052)
+GSH -->(USDEMO4)
+GSH -->(US2002a)
+RRH -->(US2053a)
+RRH -->(US2053b)
+COL -->(USDEMO8)
+GSH -->(US2010)
+GSH -->(US2002b)
+GSH -->(US2003)
+COL -->(US3021)
+COL -->(US3011)
+COL -->(US3022)
+COL -->(US3051)
+COL-->(US3023)
+COL-->(US3031)
+
+@enduml

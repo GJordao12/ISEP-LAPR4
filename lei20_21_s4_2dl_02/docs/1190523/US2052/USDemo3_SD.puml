@@ -1,0 +1,112 @@
+@startuml
+'http://plantuml.com/skinparam.html
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor Admin as Actor
+participant AddTeamUI as UI <<presentation>>
+participant AddTeamController as Controller <<application>>
+participant "team:Team" as Domain <<domain>>
+participant ListCollaboratorService as LCS <<application>>
+participant PersistenceContext as Persistence <<persistence>>
+participant RepositoryFactory as Factory <<factory>>
+participant "listaRespons:\nList<Collaborator>"
+participant "listaMembros:\nList<Collaborator>"
+database TeamRepository as Repository <<repository>>
+database TipoEquipaRepository as RepositoryTE <<repository>>
+database CollaboratorRepository as RepositoryC <<repository>>
+
+Actor --> UI: Criar Equipa
+activate UI
+    UI --> Actor: Solicita Informação
+    Actor --> UI: Código Alfanumérico, Acrónimo,\n Designação
+
+    UI -> Controller: allTeamTypes()
+    activate Controller
+
+    Controller -> Persistence: repositories
+    activate Persistence
+
+    Persistence -> Factory: create
+    activate Factory
+
+    Factory -> RepositoryTE: create
+    activate RepositoryTE
+    deactivate RepositoryTE
+    deactivate Factory
+    deactivate Persistence
+
+    Controller -> RepositoryTE: findAll()
+    activate RepositoryTE
+    deactivate RepositoryTE
+
+    Controller -> UI: allTeamTypes
+    deactivate Controller
+
+    UI --> Actor: Mostra Lista de \n Tipos de Equipa
+    Actor --> UI: Seleciona um Tipo \n de Equipa
+
+    loop option != 0
+    UI -> Controller: create
+    activate Controller
+
+    Controller -> LCS: allCollaborators()
+    activate LCS
+    deactivate Controller
+
+    LCS -> Persistence: repositories()
+    activate Persistence
+
+    Persistence -> Factory: create
+    activate Factory
+
+    Factory -> RepositoryC: create
+    activate RepositoryC
+    deactivate RepositoryC
+    deactivate Factory
+    deactivate Persistence
+
+    LCS -> RepositoryC: findAll()
+    activate RepositoryC
+    deactivate RepositoryC
+    LCS -> UI: responsibles
+    deactivate LCS
+
+    note right of UI: Esta lista será atualizada à medida que forem sendo selecionados colaboradores, \n ficando a lista final armazenada na listaRepons. Já a listaMembros de início \n estará vazia, uma vez que nesta US só se pretende adicionar responsáveis, \n sendo que será preenchida noutra US (Adicionar/Remover Colaborador \n de Equipa)
+    UI --> Actor: Mostra Lista de \n Colaboradores
+    Actor --> UI: Seleciona um Colaborador \n Responsável
+    end loop
+
+
+    UI -> Controller: addTeam(codAlfanumerico, acronimo, \n designacao, listaRespons, listaMembros)
+    activate Controller
+        Controller -> Domain: create(codAlfanumerico, acronimo, \n designacao, listaRespons, listaMembros)
+        activate Domain
+        Domain -> Controller: team
+        deactivate Domain
+
+        Controller -> Persistence: repositories()
+        activate Persistence
+            note right of Persistence: pode criar repositório em memória ou JPA
+            Persistence -> Factory: create
+            Persistence -> Controller: factory
+        deactivate Persistence
+
+        Controller -> Factory: teams()
+        activate Factory
+            Factory -> Repository: create
+            Factory -> Controller: teamRepository
+        deactivate Factory
+
+        Controller->Repository:save(team)
+        activate Repository
+        deactivate Repository
+        Controller->UI: team
+    deactivate Controller
+
+        UI-->Actor: displayTeamInfo
+deactivate UI
+@enduml

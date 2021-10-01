@@ -1,0 +1,114 @@
+@startuml
+'http://plantuml.com/skinparam.html
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+note right of Actor: Para este SD considerei um fluxo de especificação de serviço em que apenas são definidos o Título, código alfanumérico e workflow(com atividade de aprovação e atividade de execução automática)
+actor GSH as Actor
+participant AddServicoUI as UI <<presentation>>
+participant AddServicoController as Controller <<application>>
+participant "atributoFormularioAtividadeAprovacao:AtributoFormulario" as AtributoFormulario <<domain>>
+participant "atributosFormularioAtividadeAprovacao:ListaAtributosFormularioAtividadeAprovacao" as LAFAA <<application>>
+participant "formularioAtividadeAprovacao:Formulario" as Formulario <<domain>>
+participant "atividadeManual:AtividadeManual" as AtividadeManual <<domain>>
+participant "atividadeAutomatica:AtividadeAutomatica" as AtividadeAutomatica <<domain>>
+participant "workflow:Workflow" as Workflow <<domain>>
+participant ServicoBuilder as SB <<builder>>
+participant RepositoryFactory as Factory <<factory>>
+participant "ctx:TransactionalContext" as TContext
+database RepositoryCriticidade as RepositoryCriticidade <<repository>>
+database RepositoryAtributoFormulario as RepositoryAtributoFormulario <<repository>>
+database RepositoryFormulario as RepositoryFormulario <<repository>>
+database RepositoryWorkflow as RepositoryWorkflow <<repository>>
+database RepositoryAtividadeManual as RepositoryAtividadeManual<<repository>>
+database RepositoryAtividadeAutomatica as RepositoryAtividadeAutomatica <<repository>>
+database RepositoryServico as RepositoryServico <<repository>>
+participant "servico:Servico" as Servico <<domain>>
+
+Actor --> UI: Especificar Servico
+activate UI
+    UI --> Actor: Solicita informação a inserir
+    Actor --> UI: Insere Titulo,CodigoAlfaNumerico e workflow
+
+    UI -> Controller : registerAtributoFormularioAtividadeManual(nomeAtributo, etiqueta,descricao, expressaoRegular, tipoDeDados)
+    activate Controller
+
+    Controller -> AtributoFormulario : create
+    activate AtributoFormulario
+    deactivate AtributoFormulario
+
+    Controller -> LAFAA :add(atributoFormularioAtividadeAprovacao)
+    activate LAFAA
+    deactivate LAFAA
+
+    deactivate Controller
+
+    UI -> Controller : registerFormularioAtividadeManual( nome, etiqueta, script)
+    activate Controller
+
+    Controller -> Formulario : create
+    activate Formulario
+    deactivate Formulario
+
+    deactivate Controller
+
+    UI -> Controller : registerAtividadeManual()
+    activate Controller
+
+    Controller -> AtividadeAutomatica : create
+    activate AtividadeAutomatica
+    deactivate AtividadeAutomatica
+
+    deactivate Controller
+
+
+    UI -> Controller : registerAtividadeAutomatica(codigoAtividade, script)
+    activate Controller
+
+    Controller -> AtividadeAutomatica : create
+    activate AtividadeAutomatica
+    deactivate AtividadeAutomatica
+
+    deactivate Controller
+
+    UI -> Controller : registerWorkflow(dataMudanca)
+    activate Controller
+    deactivate Controller
+
+    Controller -> Workflow :create
+    activate Workflow
+    deactivate Workflow
+
+    Controller -> Controller : registerServico (codAlfaNum,  descricaoBreve,  descricaoCompletaServico, feedback,  tempoLimiteFeedback,  titulo,  icone,keywords, criticidade,estadoServico)
+        Controller -> SB : withData(codAlfaNum,titulo)
+        activate SB
+        deactivate SB
+        Controller -> SB : withFormularioDeSolicitacao(formularioSolicitacao)
+        activate SB
+        deactivate SB
+        Controller -> SB : withWorkflow(workflow)
+        activate SB
+        deactivate SB
+        Controller -> SB : withEstadoServico(workflow)
+        activate SB
+        deactivate SB
+        Controller -> SB : build()
+        activate SB
+        deactivate SB
+
+        Controller -> RepositoryServico : save(servico)
+        activate RepositoryServico
+        deactivate RepositoryServico
+
+        Controller -> TContext: commit();
+        activate TContext
+        deactivate TContext
+
+    deactivate Controller
+
+
+        UI-->Actor: Acaba a especificação do serviço
+deactivate UI
+@enduml

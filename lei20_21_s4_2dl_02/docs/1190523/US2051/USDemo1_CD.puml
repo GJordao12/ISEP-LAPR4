@@ -1,0 +1,29 @@
+@startuml
+'http://plantuml.com/skinparam.html
+
+
+class AddCollaboratorUI {
+      +doShow()
+}
+
+class AddCollaboratorController {
+    +registerCollaborator(String username, String password, \n String email, String mechanographicNumber, String shortName, \n String longName, String phoneNumber, String birthDate, \n String distrito, String concelho, Set<Role> roles, \n Collaborator responsible, ArrayList<Team> teams)
+}
+
+class Collaborator {
+
+}
+
+class CollaboratorRepository {
+  +save(Collaborator)
+}
+
+
+AddCollaboratorUI  --> AddCollaboratorController : theController
+
+AddCollaboratorUI  -->  Collaborator : theCollaborator
+
+AddCollaboratorController  -->  CollaboratorRepository : repo
+
+AddCollaboratorController  -->  Collaborator : theCollaborator
+@enduml

@@ -1,0 +1,8 @@
+START{
+Ficheiro FicheirosXML/produtos.xml [
+Elemento #preco# = Buscar produto($ID$,<preco>);
+Elemento #unidades# = Buscar produto($ID$,<unidades>);
+#total# = #preco# * #unidades#;
+EnviarEmail("Quantidade de dinheiro com a venda total do stock do Produto com ID: $ID$", "O dinheiro que consegue fazer com a venda do stock completo, #unidades# unidades a #preco# euros cada, do produto com ID: $ID$ sao #total# euros.");
+]
+}

@@ -1,0 +1,172 @@
+@startuml
+'http://plantuml.com/skinparam.html
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor RRH as Actor
+participant AddColaboradorUI as UI <<presentation>>
+participant AddColaboradorController as Controller <<application>>
+participant "colabSvc:ListCollaboratorService" as LCSVC <<application>>
+participant "teamSvc:ListTeamService" as LTSVC <<application>>
+participant "userSvc:UserManagementService" as UMSVC <<application>>
+participant UserBuilder as UB <<builder>>
+participant "user:SystemUser" as Domain
+participant "colaborador:Colaborador" as DomainC <<domain>>
+participant PersistenceContext as Persistence <<persistence>>
+participant RepositoryFactory as Factory <<factory>>
+participant "ctx:TransactionalContext" as TContext
+database UserRepository as Repository <<repository>>
+database CollaboratorRepository as RepositoryC <<repository>>
+database RoleRepository as RepositoryR <<repository>>
+database TeamRepository as RepositoryT <<repository>>
+
+Actor --> UI: Especificar Colaborador
+activate UI
+    UI --> Actor: Solicita informação a inserir
+    Actor --> UI: Número mecanográfico, nome curto,\nnome completo, data de nascimento,\nlocal de residência (distrito e conselho),\nendereço de email institucional,\nnúmero de contacto, username
+
+    opt option != 0
+        UI -> UI: showRoles(roleTypes)
+        UI --> Actor: Solicita seleção de uma função
+        Actor --> UI: Seleciona função que \n irá desempenhar
+    end
+
+    opt option != 0
+        UI -> Controller: create
+        activate Controller
+        Controller --> LCSVC: allCollaborators
+        activate LCSVC
+        deactivate Controller
+        LCSVC -> Persistence: repositories()
+        activate Persistence
+        Persistence -> Factory: create
+        activate Factory
+        Factory -> RepositoryC: create
+        activate RepositoryC
+        deactivate RepositoryC
+        deactivate Factory
+        deactivate Persistence
+        LCSVC -> RepositoryC: findAll()
+        activate RepositoryC
+        deactivate RepositoryC
+        LCSVC --> UI: collaborators
+        deactivate LCSVC
+        deactivate Controller
+        UI --> Actor: Solicita seleção de um colaborador
+        Actor --> UI: Seleciona colaborador que \n será o responsável hierárquico do novo \n colaborador
+    end
+
+    loop option != 0
+    UI -> Controller: create
+    activate Controller
+    Controller --> LTSVC: allTeams
+    activate LTSVC
+    deactivate Controller
+    LTSVC -> Persistence: repositories()
+    activate Persistence
+    Persistence -> Factory: create
+    activate Factory
+    Factory -> RepositoryT: create
+    activate RepositoryT
+    deactivate RepositoryT
+    deactivate Factory
+    deactivate Persistence
+    LTSVC -> RepositoryT: findAll()
+    activate RepositoryT
+    deactivate RepositoryT
+    LTSVC --> UI: teams
+    deactivate LTSVC
+    deactivate Controller
+        UI --> Actor: Solicita a seleção de uma equipa
+        Actor --> UI: Seleciona a equipa a que irá pertencer
+    end
+
+    UI -> Controller: registerCollaborator(username, password, email, mechanographicNumber, nomeCurto,\n nomeCompleto, phoneNumber, birthDate, distrito,\n concelho, roleTypes, responsible, teamsSelected)
+    activate Controller
+
+        Controller -> Persistence: repositories()
+        activate Persistence
+        Persistence -> Factory: newTransactionalContext()
+        activate Factory
+        Factory -> TContext: create
+        activate TContext
+        deactivate TContext
+        deactivate Factory
+        deactivate Persistence
+        Controller -> TContext: beginTransaction()
+        activate TContext
+        deactivate TContext
+        note right of Controller: firstName e lastName obtidos através de uso do split de espaço em nomeCurto (primeiro e último nome)
+        Controller -> UMSVC: registerNewUser(username, pwd, firstName, lastName, email, roles, createdOn)
+        activate UMSVC
+        UMSVC -> UB: create
+        UMSVC -> UB: setUsername(username)
+        note right of UB: Terá de ser feito set de todos os outros parâmetros do método registerNewUser
+        UMSVC -> UB: createUser()
+        activate UB
+        UB -> Domain: create(username, pwd, firstName, lastName, email, roles)
+        activate Domain
+        Domain -> UB: user
+        deactivate Domain
+        UB -> UMSVC: user
+        deactivate UB
+        UMSVC -> Controller: user
+        deactivate UMSVC
+        Controller -> Persistence: repositories()
+        activate Persistence
+            note right of Persistence: pode criar repositório em memória ou JPA
+            Persistence -> Factory: create
+            activate Factory
+            deactivate Factory
+            Persistence -> Controller: factory
+        deactivate Persistence
+
+        Controller -> Factory: users()
+        activate Factory
+            Factory -> Repository: usersRegistration(ctx)
+            activate Repository
+            deactivate Repository
+            Factory -> Controller: userRepository
+        deactivate Factory
+
+        Controller -> Repository:save(user)
+        activate Repository
+        deactivate Repository
+
+        note right of Controller: De modo a obter um objeto presente na BD do tipo role, recorri a este método roleRepository.findRoleByDesignation(desig) que possui uma query com esse mesmo objetivo.\nO parâmetro desig trata-se da designação da role inserida anteriormente. E por isso temos aqui a representação da RoleRepository, uma vez que foi feita uma busca relativamente a este repositório.
+        Controller -> DomainC: create(user, numeroMecanografico, nomeCurto,\nnomeCompleto, dataNascimento, localResidencia, \n numeroContacto, funcao, responsavel)
+        activate DomainC
+        DomainC -> Controller: collaborator
+        deactivate DomainC
+        Controller -> Persistence: repositories()
+        activate Persistence
+            note right of Persistence: pode criar repositório em memória ou JPA
+            Persistence -> Factory: create
+            activate Factory
+            deactivate Factory
+            Persistence -> Controller: factory
+        deactivate Persistence
+
+        Controller -> Factory: colaborators()
+        activate Factory
+            Factory -> RepositoryC: colaboratorsRegistration(ctx)
+            activate RepositoryC
+            deactivate RepositoryC
+            Factory -> Controller: colaboratorRepository
+        deactivate Factory
+
+        Controller->RepositoryC: save(colaborator)
+        activate RepositoryC
+        deactivate RepositoryC
+        Controller -> TContext: commit()
+        activate TContext
+        deactivate TContext
+        Controller->UI: colaborator
+        deactivate Controller
+
+        UI-->Actor: displayUserInfo
+deactivate UI
+@enduml

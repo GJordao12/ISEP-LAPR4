@@ -1,0 +1,6 @@
+START{
+Ficheiro FicheirosXML/bonus.xml [
+Elemento #bonus# = Buscar colaborador($Número Mecanográfico$,<mes>,$Mês$);
+EnviarEmail("Bonus do Mes $Mês$", "No mes $Mês$ voce recebeu #bonus# euros de bonus.");
+]
+}
