@@ -8,7 +8,7 @@ O grupo de trabalho é constituído pelo estudantes identificados na tabela segu
 |----------------------------------------------------------------|----------------------------|
 | **[1190447](/docs/1190447/)**                                  | Bruno Silva                |
 | **[1190523](/docs/1190523/ListaFuncionalidadesEstudante.md)**  | Diogo Domingues            |
-| **[1190633](../docs/1190633/ListaFuncionalidadesEstudante.md)**  | Gonçalo Jordão             |
+| **[1190633](../../1190633/ListaFuncionalidadesEstudante.md)**  | Gonçalo Jordão             |
 | **[1190995](/docs/1190995/)**                                  | Ricardo Mesquita           |
 
 **NOTA:** Clicando no **Número** de um Aluno será reencaminhado para a **Lista de Funcionalidades** desenvolvidas pelo mesmo.
