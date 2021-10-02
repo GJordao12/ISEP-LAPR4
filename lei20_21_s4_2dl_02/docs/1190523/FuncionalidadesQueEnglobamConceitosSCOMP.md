@@ -1,4 +1,4 @@
-** Aluno [1190523](./)**
+**Aluno [1190523](./)**
 ===============================
 
 **Nota:** Além desta US desenvolvida no âmbito da cadeira de SCOMP, foi também utilizado o conceito de Threads ao longo do projeto e de outras US´s desenvolvidas.
