@@ -7,5 +7,5 @@
 
 | Sprint | Funcionalidade     |
 | ------ | ------------------ |
-| **B**  | [USDemo4](USDemo4) |
-| **B**  | [USDemo8](USDemo8) |
+| **B**  | [USDemo4](USDemo4/ProcessoEngenhariaFuncionalidade.md) |
+| **B**  | [USDemo8](USDemo8/ProcessoEngenhariaFuncionalidade.md) |
