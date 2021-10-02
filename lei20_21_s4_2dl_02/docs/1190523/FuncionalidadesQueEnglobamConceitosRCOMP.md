@@ -1,4 +1,4 @@
-** Aluno [1190523](./)**
+**Aluno [1190523](./)**
 ===============================
 
 **Nota:** No Sprint D, a documentação das funcionalidades aqui presentes do Sprint C foram atualizadas (devido à proteção das comunicações adicionada neste sprint)/melhoradas em relação ao Sprint C.
