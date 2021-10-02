@@ -1,5 +1,5 @@
-# Projeto Integrador da LEI-ISEP 2020-21 - 4º Semestre
+# Integrating Project of LEI-ISEP 2020-21 - 4th Semester
 
-* Neste **repositório** irá encontrar toda a **documentação** e **implementação** relativa ao **Projeto Integrador da LEI-ISEP 2020-21** desenvolvido pelo **Grupo 2** da **Turma 2DL**.
+* In this **repository** you will find all **documentation** and **implementation** related to the **Lei-ISEP 2020-21 Integrating Project** developed by the **Group 2** of the **Class 2DL* *.
 
-* Toda o **planeamento do projeto** está descrito no ficheiro [Planeamento](/docs/Planeamento/Planeamento.md) desenvolvido pela equipa.
+* All **project planning** is described in the [Planning File](/docs/Planeamento/Planeamento.md) developed by the team.
