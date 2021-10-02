@@ -1,4 +1,4 @@
-** Aluno [1190523](./)**
+**Aluno [1190523](./)**
 ===============================
 
 **Nota:** Além destas US´s desenvolvidas com uma ligação direta à cadeira de LPROG, foram também utilizadas expressões regulares ao longo do projeto e de outras US´s desenvolvidas.
