@@ -1,4 +1,4 @@
-** Aluno [1190523](./)**
+**Aluno [1190523](./)**
 ===============================
 
 **Nota:** Aqui encontram-se todas as minhas funcionalidades desenvolvidas ao longo dos Sprints, tendo também 2 ficheiros presentes na minha pasta que possuem a ligação para a documentação das funcionalidades desenvolvidas que englobam especificamente as cadeiras de RCOMP e LPROG.
